@@ -26,10 +26,10 @@ public class AppConfig {
     @Bean
     public DataSource dataSource() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setDatabaseName("lms");
-        mysqlDataSource.setURL("jdbc:mysql://localhost:3306/lms");
+        mysqlDataSource.setDatabaseName("empbook");
+        mysqlDataSource.setURL("jdbc:mysql://localhost:3306/empbook");
         mysqlDataSource.setUser("root");
-        mysqlDataSource.setPassword("root");
+        mysqlDataSource.setPassword("");
         return mysqlDataSource;
     }
 }

@@ -36,7 +36,7 @@
             <td>${employee.employeeType.toString()}</td>
             <td>${employee.joiningDate.toString()}</td>
             <td><a href="/employee/update/${employee.employeeId}">Update</a> | <a
-                    href="/employee/delete/${employee.employeeId}">Delete</a></td>
+                    href="${pageContext.request.contextPath}/employees/delete?employeeId=${employee.employeeId}">Delete</a></td>
         </tr>
 
     </c:forEach>

@@ -34,7 +34,7 @@ employee_id INT NOT NULL,
 leave_type ENUM('ANNUAL', 'SICK') NOT NULL,
 number_of_days FLOAT NOT NULL,
 PRIMARY KEY (leave_id),
-FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+FOREIGN KEY (employee_id) REFERENCES employees(employee_id) ON DELETE CASCADE
 );
 ```
 

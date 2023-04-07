@@ -44,14 +44,28 @@ public class EmployeeRepository {
         return employee;
     }
 
-    public boolean create(Employee employee) throws SQLException {
+    public long create(Employee employee) throws SQLException {
         Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(CREATE);
+        PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, employee.getName());
         preparedStatement.setString(2, employee.getEmployeeType().name());
         preparedStatement.setDate(3, Date.valueOf(employee.getJoiningDate()));
-        return preparedStatement.execute();
+        preparedStatement.executeUpdate();
+
+        // Retrieve the generated keys from the statement
+        ResultSet rs = preparedStatement.getGeneratedKeys();
+        long id = -1;
+        if (rs.next()) {
+            id = rs.getLong(1);
+        }
+
+        rs.close();
+        preparedStatement.close();
+        connection.close();
+
+        return id;
     }
+
 
     public boolean update(Employee employee) throws SQLException {
         Connection connection = dataSource.getConnection();

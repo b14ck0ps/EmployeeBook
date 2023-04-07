@@ -62,7 +62,7 @@ public class EmployeeController {
         if (bindingResult.hasErrors()) {
             return "employee/create";
         }
-        employeeService.create(employee);
+        employeeService.createEmployeeAndLeave(employee);
         return "redirect:/employees/list";
     }
 

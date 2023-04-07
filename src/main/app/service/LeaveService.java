@@ -1,5 +1,7 @@
 package main.app.service;
 
+import main.app.domain.Employee;
+import main.app.domain.EmployeeType;
 import main.app.domain.Leave;
 import main.app.repository.LeaveRepository;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,7 @@ import java.util.List;
 
 @Service
 public class LeaveService {
-    private LeaveRepository leaveRepository;
+    private static LeaveRepository leaveRepository;
 
     public LeaveService(LeaveRepository leaveRepository) {
         this.leaveRepository = leaveRepository;
@@ -23,7 +25,7 @@ public class LeaveService {
         return leaveRepository.get(id);
     }
 
-    public boolean create(Leave leave) throws SQLException {
+    public static boolean create(Leave leave) throws SQLException {
         return leaveRepository.create(leave);
     }
 

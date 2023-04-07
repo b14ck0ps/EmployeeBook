@@ -1,6 +1,6 @@
 package main.app.domain;
 
-public class Leave {
+public class Leave extends Employee {
     private Long leaveId;
     private Employee employee;
     private LeaveType leaveType;
@@ -9,6 +9,7 @@ public class Leave {
     public Leave() {
 
     }
+
     public Leave(Long leaveId, Employee employee, LeaveType leaveType, double numberOfDays) {
         this.leaveId = leaveId;
         this.employee = employee;

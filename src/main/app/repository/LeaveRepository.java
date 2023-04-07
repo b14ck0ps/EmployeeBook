@@ -18,6 +18,7 @@ public class LeaveRepository {
     private static final String CREATE = "insert into `leave` (employee_id, leave_type, number_of_days) values (?, ?, ?)";
     private static final String UPDATE = "update `leave` set employee_id = ?, leave_type = ?, number_of_days = ? where leave_id = ?";
     private static final String DELETE = "delete from `leave` where leave_id = ?";
+    private static final String SELECT_BY_EMPLOYEE_ID = "select leave_id, employee_id, leave_type, number_of_days from `leave` where employee_id = ?";
 
     public LeaveRepository(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -69,6 +70,14 @@ public class LeaveRepository {
         PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
         preparedStatement.setLong(1, id);
         return preparedStatement.execute();
+    }
+
+    public List<Leave> listByEmployeeId(Long employeeId) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_EMPLOYEE_ID);
+        preparedStatement.setLong(1, employeeId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return mapper(resultSet);
     }
 
     private List<Leave> mapper(ResultSet resultSet) throws SQLException {

@@ -21,7 +21,7 @@ public class LeaveService {
         return leaveRepository.list();
     }
 
-    public Leave get(Long id) throws SQLException {
+    public static Leave get(Long id) throws SQLException {
         return leaveRepository.get(id);
     }
 
@@ -29,11 +29,15 @@ public class LeaveService {
         return leaveRepository.create(leave);
     }
 
-    public boolean update(Leave leave) throws SQLException {
+    public static boolean update(Leave leave) throws SQLException {
         return leaveRepository.update(leave);
     }
 
-    public boolean delete(Long id) throws SQLException {
+    public static boolean delete(Long id) throws SQLException {
         return leaveRepository.delete(id);
+    }
+
+    public static List<Leave> listByEmployeeId(Long employeeId) throws SQLException {
+        return leaveRepository.listByEmployeeId(employeeId);
     }
 }

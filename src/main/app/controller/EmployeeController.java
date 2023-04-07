@@ -3,6 +3,7 @@ package main.app.controller;
 import main.app.domain.Employee;
 import main.app.domain.EmployeeType;
 import main.app.service.EmployeeService;
+import main.app.service.LeaveService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,6 +50,14 @@ public class EmployeeController {
         //Idea 3 : Make the Name Click able and make a new page for Leave List ?
         model.addAttribute("employees", employeeService.list());
         return "employee/list";
+    }
+
+    @RequestMapping("/info")
+    public String info(@RequestParam("employeeId") Long employeeId, Model model) throws SQLException {
+        Employee employee = employeeService.get(employeeId);
+        model.addAttribute("employee", employee);
+        model.addAttribute("employee_leave", LeaveService.listByEmployeeId(employeeId));
+        return "employee/info";
     }
 
     @RequestMapping("/create")

@@ -32,7 +32,7 @@
 
         <tr>
             <td>${employee.employeeId}</td>
-            <td>${employee.name}</td>
+            <td><a href="${pageContext.request.contextPath}/employees/info?employeeId=${employee.employeeId}">${employee.name}</a></td>
             <td>${employee.employeeType.toString()}</td>
             <td>${employee.joiningDate.toString()}</td>
             <td><a href="/employee/update/${employee.employeeId}">Update</a> | <a

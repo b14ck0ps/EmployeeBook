@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.beans.PropertyEditorSupport;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Controller
@@ -33,10 +36,17 @@ public class EmployeeController {
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
         binder.registerCustomEditor(EmployeeType.class, new PropertyEditorSupport() {
-            // TODO: Make it work
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
                 setValue(EmployeeType.valueOf(text.toUpperCase()));
+            }
+        });
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                LocalDate localDate = LocalDate.parse(text, dateFormatter);
+                setValue(localDate);
             }
         });
     }
@@ -44,10 +54,6 @@ public class EmployeeController {
 
     @RequestMapping("/list")
     public String list(Model model) throws SQLException {
-        //TODO: Return ANNUAL LEAVE AND SICK LEAVE
-        //Idea 1 : Make a new Model class / Anonymous class for Employee and Leave combine and return it ?
-        //Idea 2 : Somehow map them in repository and return it ?
-        //Idea 3 : Make the Name Click able and make a new page for Leave List ?
         model.addAttribute("employees", employeeService.list());
         return "employee/list";
     }

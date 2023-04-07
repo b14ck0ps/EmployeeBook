@@ -5,6 +5,7 @@ import main.app.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -24,6 +25,7 @@ public class EmployeeService {
     }
 
     public boolean create(Employee employee) throws SQLException {
+        employee.setJoiningDate(LocalDate.now());
         return employeeRepository.create(employee);
     }
 

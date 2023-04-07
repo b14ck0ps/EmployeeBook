@@ -27,7 +27,7 @@
     <div class="col-md-6">
         <label for="employeeType" class="form-label">Employee Type:</label>
         <form:select path="employeeType" id="employeeType" class="form-select">
-            <form:options items="${['STUFF', 'NON_STUFF']}"/>
+            <form:options items="${['STAFF', 'NON_STAFF']}"/>
         </form:select>
         <form:errors path="employeeType" class="invalid-feedback"/>
     </div>

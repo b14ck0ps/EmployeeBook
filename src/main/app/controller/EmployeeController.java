@@ -2,7 +2,6 @@ package main.app.controller;
 
 import main.app.domain.Employee;
 import main.app.domain.EmployeeType;
-import main.app.domain.Leave;
 import main.app.service.EmployeeService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.beans.PropertyEditorSupport;
 import java.sql.SQLException;
-import java.util.List;
 
 
 @Controller

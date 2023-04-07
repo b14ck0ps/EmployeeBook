@@ -35,7 +35,7 @@
             <td><a href="${pageContext.request.contextPath}/employees/info?employeeId=${employee.employeeId}">${employee.name}</a></td>
             <td>${employee.employeeType.toString()}</td>
             <td>${employee.joiningDate.toString()}</td>
-            <td><a href="/employee/update/${employee.employeeId}">Update</a> | <a
+            <td><a href="${pageContext.request.contextPath}/employees/edit?employeeId=${employee.employeeId}">Edit</a> | <a
                     href="${pageContext.request.contextPath}/employees/delete?employeeId=${employee.employeeId}">Delete</a></td>
         </tr>
 

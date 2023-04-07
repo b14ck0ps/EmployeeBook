@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Service
 public class EmployeeService {
-    private EmployeeRepository employeeRepository;
+    private static EmployeeRepository employeeRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -49,7 +49,24 @@ public class EmployeeService {
         return true;
     }
 
-    private Leave createLeave(Employee employee, LeaveType leaveType) {
+    public static boolean updateEmployeeAndLeave(Employee employee) throws SQLException {
+        long emp_id = employee.getEmployeeId();
+        employeeRepository.update(employee);
+
+        List<Leave> leaves = LeaveService.listByEmployeeId(emp_id);
+        for (Leave leave : leaves) {
+            LeaveType leaveType = leave.getLeaveType();
+            Leave newLeave = createLeave(employee, leaveType);
+            newLeave.setLeaveId(leave.getLeaveId());
+            if (newLeave != null) {
+                LeaveService.update(newLeave);
+            } else return false;
+        }
+        return true;
+    }
+
+
+    private static Leave createLeave(Employee employee, LeaveType leaveType) {
         Leave leave = new Leave();
         leave.setEmployee(employee);
         leave.setLeaveType(leaveType);

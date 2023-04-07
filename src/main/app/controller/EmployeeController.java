@@ -2,6 +2,7 @@ package main.app.controller;
 
 import main.app.domain.Employee;
 import main.app.domain.EmployeeType;
+import main.app.domain.Leave;
 import main.app.service.EmployeeService;
 import main.app.service.LeaveService;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 
 @Controller
@@ -93,7 +95,12 @@ public class EmployeeController {
         if (bindingResult.hasErrors()) {
             return "employee/edit";
         }
-        employeeService.update(employee);
+        Employee oldEmployee = employeeService.get(employee.getEmployeeId());
+        if (oldEmployee.getEmployeeType() != employee.getEmployeeType() || oldEmployee.getJoiningDate() != employee.getJoiningDate()) {
+            EmployeeService.updateEmployeeAndLeave(employee);
+        } else {
+            employeeService.update(employee);
+        }
         return "redirect:/employees/list";
     }
 

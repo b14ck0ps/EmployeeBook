@@ -28,8 +28,8 @@ public class EmployeeService {
     }
 
     public boolean createEmployeeAndLeave(Employee employee) throws SQLException {
-//        employee.setJoiningDate(LocalDate.now());
-        employee.setJoiningDate(LocalDate.of(2023, 11, 12)); //test
+        employee.setJoiningDate(LocalDate.now());
+//      employee.setJoiningDate(LocalDate.of(2023, 12, 12)); //test
 
         long emp_id = employeeRepository.create(employee);
         if (emp_id == -1) {
@@ -55,9 +55,9 @@ public class EmployeeService {
         leave.setEmployee(employee);
         leave.setLeaveType(leaveType);
 
-        Map<LeaveType, Integer> leaveDaysMap = LeaveDayCalculatorService.calculateLeaveDays(leave, employee);
+        Map<LeaveType, Integer> leaveDaysMap = LeaveDayCalculatorService.calculateLeaveDays(employee);
         int leaveDays = leaveDaysMap.get(leaveType);
-        if (leaveDays > 0) {
+        if (leaveDays >= 0) {
             leave.setNumberOfDays(leaveDays);
             return leave;
         } else {

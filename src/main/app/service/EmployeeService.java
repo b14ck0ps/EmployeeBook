@@ -28,7 +28,9 @@ public class EmployeeService {
     }
 
     public boolean createEmployeeAndLeave(Employee employee) throws SQLException {
-        employee.setJoiningDate(LocalDate.now());
+//        employee.setJoiningDate(LocalDate.now());
+        employee.setJoiningDate(LocalDate.of(2023, 11, 12)); //test
+
         long emp_id = employeeRepository.create(employee);
         if (emp_id == -1) {
             return false;

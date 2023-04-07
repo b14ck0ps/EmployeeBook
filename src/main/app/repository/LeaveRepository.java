@@ -13,11 +13,11 @@ import java.util.List;
 @Repository
 public class LeaveRepository {
     private DataSource dataSource;
-    private static final String ALL = "select leave_id, employee_id, leave_type, number_of_days from leave";
-    private static final String SELECT_ONE = "select leave_id, employee_id, leave_type, number_of_days from leave where leave_id = ?";
-    private static final String CREATE = "insert into leave (employee_id, leave_type, number_of_days) values (?, ?, ?)";
-    private static final String UPDATE = "update leave set employee_id = ?, leave_type = ?, number_of_days = ? where leave_id = ?";
-    private static final String DELETE = "delete from leave where leave_id = ?";
+    private static final String ALL = "select leave_id, employee_id, leave_type, number_of_days from `leave`";
+    private static final String SELECT_ONE = "select leave_id, employee_id, leave_type, number_of_days from `leave` where leave_id = ?";
+    private static final String CREATE = "insert into `leave` (employee_id, leave_type, number_of_days) values (?, ?, ?)";
+    private static final String UPDATE = "update `leave` set employee_id = ?, leave_type = ?, number_of_days = ? where leave_id = ?";
+    private static final String DELETE = "delete from `leave` where leave_id = ?";
 
     public LeaveRepository(DataSource dataSource) {
         this.dataSource = dataSource;
